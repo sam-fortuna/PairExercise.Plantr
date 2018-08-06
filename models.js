@@ -20,6 +20,9 @@ const Vegetable = db.define('vegetable', {
 Plot.belongsTo(Gardener);
 Gardener.hasOne(Plot);
 
-Vegetables.belongstoMany(Gardener, {through: })
+Vegetable.belongsToMany(Plot, {through: 'vegetable_plot'});
+Plot.belongsToMany(Vegetable, {through: 'vegetable_plot'});
+
+Gardener.belongsTo(Vegetable, {as: 'favorite_vegetable'});
 
 module.exports = db;
