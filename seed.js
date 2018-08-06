@@ -28,17 +28,15 @@ const { db, Gardener, Plot, Vegetable } = require('./models');
 db.sync({force: true})
 .then(
   () => {
-    return Vegetable.bulkCreate([
-    { name: 'Beet', color: 'red', plantedon: Date.now(), id: 1 },
-    { name: 'Broccoli', color: 'green', plantedon: Date.now(), id: 2}]
+    return Vegetable.create(
+    { name: 'Beet', color: 'red', plantedon: Date.now() },
 )})
 .then(
   (veggies) => {
-    console.log(veggies[0])
     return Gardener.create({
       name: 'Mr. Gardener',
       age: 56,
-      favoriteVegetableId: veggies[0].id
+      favoriteVegetableId: veggies.id
     })
   })
 .catch(
